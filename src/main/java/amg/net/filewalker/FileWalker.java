@@ -44,6 +44,9 @@ public class FileWalker {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Starting building filtr");
 		}
+		if(filterFlag==null){
+			logger.error("Filter Flags was not set",new IllegalArgumentException());
+		}
 		IOFileFilter buildedFilter= (filterFlag==AndOrEnum.AND) ?  FileFilterUtils.trueFileFilter() : FileFilterUtils.falseFileFilter();
 		
 		for (IOFileFilter fileFilter : filterList) {

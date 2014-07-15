@@ -45,6 +45,7 @@ public class FileWalkerTest {
 	
 	@Test(expected=BadFileException.class)
 	public void testWalkBadPath() throws NullPointerException{
+		newFileWalker.setFilterFlag(AndOrEnum.AND);
 		newFileWalker.walk(BAD_PATH);
 	}
 
@@ -55,6 +56,7 @@ public class FileWalkerTest {
 		when(mockFilter.accept(any(File.class))).thenReturn(true);
 		filterTestList.add(mockFilter);
 		newFileWalker.setFilterList(filterTestList);
+		newFileWalker.setFilterFlag(AndOrEnum.AND);
 		newFileWalker.walk(PATH);
 	    assertEquals(5, newFileWalker.getFiltredList().size());
 	}
@@ -66,8 +68,8 @@ public class FileWalkerTest {
 		IOFileFilter mockFilter=mock(IOFileFilter.class);
 		when(mockFilter.accept(any(File.class))).thenReturn(true);
 		filterTestList.add(mockFilter);
-		
 		newFileWalker.setFilterList(filterTestList);
+		newFileWalker.setFilterFlag(AndOrEnum.AND);
 		newFileWalker.walk(PATH);
 		assertEquals(4, newFileWalker.getFiltredList().size());
 	}
@@ -77,6 +79,7 @@ public class FileWalkerTest {
 		filterTestList.add(new RegexFileFilter(".*3.*"));
 		filterTestList.add(new SizeFileFilter(17));
 		newFileWalker.setFilterList(filterTestList);
+		newFileWalker.setFilterFlag(AndOrEnum.AND);
 		newFileWalker.walk(PATH);
 		assertEquals(3, newFileWalker.getFiltredList().size());
 	}
