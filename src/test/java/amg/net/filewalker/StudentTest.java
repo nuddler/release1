@@ -18,7 +18,7 @@ public class StudentTest {
 
 	@Test
 	public void testCreatingObjectFromXml() throws JAXBException {
-		String path = "src/main/resources/Student.xml";
+		String path = "src/test/resources/Student.xml";
 		JAXBContext jc = JAXBContext.newInstance(Student.class);
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		StreamSource streamSource = new StreamSource(new File(path));

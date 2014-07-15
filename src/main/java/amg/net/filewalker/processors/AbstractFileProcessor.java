@@ -3,11 +3,10 @@ package amg.net.filewalker.processors;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import amg.net.filewalker.FileBean;
-import amg.net.filewalker.processors.errors.FileBeanNullException;
 
 
 public abstract class AbstractFileProcessor implements IProcessor {

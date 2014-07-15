@@ -26,8 +26,6 @@ public class FileWalkerTest {
 	private static final String BAD_PATH = "\\/g/hdgh/h/ome/praktykant/test";
 	private static final String PATH = "/home/praktykant/test";
 	private static final String FILE_PATH = "/home/praktykant/test/1";
-//	private static final String PATH = "C:\\test";
-//	private static final String FILE_PATH = "C:\\test\\1.txt";
 	
 	private static FileWalker newFileWalker;
 	
