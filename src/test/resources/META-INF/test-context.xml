@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="amg.net.filewalker" />
+
+<!--  	<bean id="sizeFilter" class="org.apache.commons.io.filefilter.SizeFileFilter">
+		<constructor-arg name="size" type="long" value="17" />
+	</bean>
+-->	
+	<bean id="regexFilter" class="org.apache.commons.io.filefilter.RegexFileFilter">
+		<constructor-arg name="pattern"  value=".*3.*"> </constructor-arg>
+	</bean>
+	
+	<bean id="regexFilter2" class="org.apache.commons.io.filefilter.RegexFileFilter">
+		<constructor-arg name="pattern"  value=".*77.*"> </constructor-arg>
+	</bean>
+	
+	<bean id="fileWalker" class="amg.net.filewalker.FileWalker" init-method="init"> 
+		
+		<property name="filterList">
+			<list value-type="org.apache.commons.io.filefilter">
+				<ref bean="regexFilter2" />
+				<ref bean="regexFilter" />
+			</list>
+		</property>
+
+		<property name="filterFlag" value="OR"/>
+		
+	</bean>
+</beans>
