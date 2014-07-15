@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="student" type="student" />
+
+	<xs:complexType name="student">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" maxOccurs="3" />
+			<xs:element name="lastName" type="xs:string" />
+			<xs:element name="marks" type="Mark" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Mark">
+	<xs:sequence>
+		<xs:element name="markValue">
+			<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="1" />
+					<xs:maxInclusive value="6" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:element>
+		<xs:element name="markName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
