@@ -10,28 +10,28 @@
 
 	<context:component-scan base-package="amg.net.filewalker" />
 
-<!--  	<bean id="sizeFilter" class="org.apache.commons.io.filefilter.SizeFileFilter">
-		<constructor-arg name="size" type="long" value="17" />
-	</bean>
--->	
 	<bean id="regexFilter" class="org.apache.commons.io.filefilter.RegexFileFilter">
-		<constructor-arg name="pattern"  value=".*3.*"> </constructor-arg>
+		<constructor-arg name="pattern" value=".*3.*">
+		</constructor-arg>
 	</bean>
-	
+
 	<bean id="regexFilter2" class="org.apache.commons.io.filefilter.RegexFileFilter">
-		<constructor-arg name="pattern"  value=".*77.*"> </constructor-arg>
+		<constructor-arg name="pattern" value=".*77.*">
+		</constructor-arg>
 	</bean>
-	
-	<bean id="fileWalker" class="amg.net.filewalker.FileWalker" init-method="init"> 
-		
-		<property name="filterList">
-			<list value-type="org.apache.commons.io.filefilter">
+
+	<bean id="fileWalker" class="amg.net.filewalker.FileWalker" />
+
+	<bean id="filterList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
 				<ref bean="regexFilter2" />
 				<ref bean="regexFilter" />
 			</list>
-		</property>
-
-		<property name="filterFlag" value="OR"/>
-		
+		</constructor-arg>
+	</bean>
+	<bean id="filterFlag" class="amg.net.filewalker.AndOrEnum"
+		factory-method="valueOf">
+		<constructor-arg value="AND" />
 	</bean>
 </beans>

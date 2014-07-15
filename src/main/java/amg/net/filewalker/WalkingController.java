@@ -32,7 +32,7 @@ public class WalkingController {
 		processors.add(new LineCountProcessor());
 		processors.add(new LettersCountProcessor());
 		processors.add(new REGEXCountProcessor(".*1.*"));
-		worker.setFilterList(filters);
+		worker.orderFileFilterBuild(filters, AndOrEnum.AND);
 		worker.setProcessorList(processors);
 	}
 }

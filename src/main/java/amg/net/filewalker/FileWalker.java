@@ -1,20 +1,15 @@
 package amg.net.filewalker;
 
-import static org.apache.commons.io.filefilter.FileFilterUtils.and;
-import static org.apache.commons.io.filefilter.FileFilterUtils.or;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Required;
 
 import amg.net.filewalker.errors.BadFileException;
 import amg.net.filewalker.processors.AbstractFileProcessor;
@@ -24,7 +19,7 @@ import amg.net.filewalker.processors.IProcessor;
 public class FileWalker {
 	private List<FileBean> fileList = new ArrayList<FileBean>();
 
-	private List<IOFileFilter> filterList = new ArrayList<IOFileFilter>();
+//	private List<IOFileFilter> filterList = new ArrayList<IOFileFilter>();
 	
 	private AndOrEnum filterFlag;
 	
@@ -33,43 +28,35 @@ public class FileWalker {
 	private List<FileBean> filtredList = new ArrayList<FileBean>();
 	
 	static final Logger logger = LogManager.getLogger(FileWalker.class);
+	private FileFilterBuilder builder;
 	
-	public void init(){
+
+	public void orderFileFilterBuild(List<IOFileFilter> componentsList, AndOrEnum settings){
 		if (logger.isDebugEnabled()) {
-			logger.debug("Init method");
+			logger.debug("FileFilter order received");
 		}
-	}
-	
-	private IOFileFilter buildFilter(){
+		builder=new FileFilterBuilder();
+		if(componentsList==null || componentsList.size()==0 || settings==null){
+				logger.error("Bad order settings",new IllegalArgumentException());
+		}
+		builder.setFilterList(componentsList);
+		builder.setFilterFlag(settings);
 		if (logger.isDebugEnabled()) {
-			logger.debug("Starting building filtr");
+			logger.debug("FileFilter order prepared");
 		}
-		if(filterFlag==null){
-			logger.error("Filter Flags was not set",new IllegalArgumentException());
-		}
-		IOFileFilter buildedFilter= (filterFlag==AndOrEnum.AND) ?  FileFilterUtils.trueFileFilter() : FileFilterUtils.falseFileFilter();
-		
-		for (IOFileFilter fileFilter : filterList) {
-			if(filterFlag==AndOrEnum.AND){
-				buildedFilter=and(buildedFilter,fileFilter);
-			}
-			else{
-				buildedFilter=or(buildedFilter,fileFilter);
-			}
-		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("Filtr was created");
-		}
-		return buildedFilter;
 	}
 	
 	public void walk(String path) {
-		logger.debug("Starting walking in :"+path);
+		if (logger.isDebugEnabled()) {
+			logger.debug("Starting walking in :"+path);
+		}
 		Collection<File> fileArray;
 		fileList.clear();
 		filtredList.clear();
-		
-		fileArray=FileUtils.listFiles(readFile(path),buildFilter(), TrueFileFilter.INSTANCE);
+		if(builder==null){
+			logger.error("Filter was not orderd",new NullPointerException());
+		}
+		fileArray=FileUtils.listFiles(readFile(path),builder.build(), TrueFileFilter.INSTANCE);
 		for (File readFile : fileArray) {
 			FileBean readFileBean= new FileBean(readFile);
 			for (IProcessor processor : processorList) {
@@ -93,17 +80,9 @@ public class FileWalker {
 		return fileList;
 	}
 
-	public List<IOFileFilter> getFilterList() {
-		return filterList;
-	}
 
 	public List<FileBean> getFiltredList() {
 		return filtredList;
-	}
-
-	@Required
-	public void setFilterList(List<IOFileFilter> filterList) {
-		this.filterList = filterList;
 	}
 
     public List<IProcessor> getProcessorList() {

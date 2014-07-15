@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.apache.commons.io.filefilter.IOFileFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,17 @@ public class SpringWalkerTest {
 	@Autowired
 	FileWalker fileWalker;
 	int MIN_FILE_NO = 1;
-
-
+	@Autowired
+	AndOrEnum filterFlag;
+	@Autowired
+	List<IOFileFilter> filterList;
+	
 	@Test
 	public void positiveTest()  {
+		fileWalker.orderFileFilterBuild(filterList, filterFlag);
 		fileWalker.walk(FILE_PATH);
 		ShowMachine.showPath(fileWalker.getFiltredList());
 		List<FileBean> testList=fileWalker.getFiltredList();
-		assertTrue(testList.size() > MIN_FILE_NO);
+		assertTrue(testList.size() == 1);
 	}
 }

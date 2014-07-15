@@ -55,8 +55,7 @@ public class FileWalkerTest {
 		IOFileFilter mockFilter=mock(IOFileFilter.class);
 		when(mockFilter.accept(any(File.class))).thenReturn(true);
 		filterTestList.add(mockFilter);
-		newFileWalker.setFilterList(filterTestList);
-		newFileWalker.setFilterFlag(AndOrEnum.AND);
+		newFileWalker.orderFileFilterBuild(filterTestList, AndOrEnum.AND);
 		newFileWalker.walk(PATH);
 	    assertEquals(5, newFileWalker.getFiltredList().size());
 	}
@@ -68,8 +67,7 @@ public class FileWalkerTest {
 		IOFileFilter mockFilter=mock(IOFileFilter.class);
 		when(mockFilter.accept(any(File.class))).thenReturn(true);
 		filterTestList.add(mockFilter);
-		newFileWalker.setFilterList(filterTestList);
-		newFileWalker.setFilterFlag(AndOrEnum.AND);
+		newFileWalker.orderFileFilterBuild(filterTestList, AndOrEnum.AND);
 		newFileWalker.walk(PATH);
 		assertEquals(4, newFileWalker.getFiltredList().size());
 	}
@@ -78,8 +76,7 @@ public class FileWalkerTest {
 	public void testListFromWalk() {
 		filterTestList.add(new RegexFileFilter(".*3.*"));
 		filterTestList.add(new SizeFileFilter(17));
-		newFileWalker.setFilterList(filterTestList);
-		newFileWalker.setFilterFlag(AndOrEnum.AND);
+		newFileWalker.orderFileFilterBuild(filterTestList, AndOrEnum.AND);
 		newFileWalker.walk(PATH);
 		assertEquals(3, newFileWalker.getFiltredList().size());
 	}
