@@ -27,6 +27,7 @@ public class FileWalkerTest {
 	private static final String PATH = "/home/praktykant/test";
 	private static final String FILE_PATH = "/home/praktykant/test/1";
 	
+
 	private static FileWalker newFileWalker;
 	
 	private static AbstractFileProcessor processor;
@@ -56,6 +57,7 @@ public class FileWalkerTest {
 		when(mockFilter.accept(any(File.class))).thenReturn(true);
 		filterTestList.add(mockFilter);
 		newFileWalker.orderFileFilterBuild(filterTestList, AndOrEnum.AND);
+		newFileWalker.setReportHolder(new Report());
 		newFileWalker.walk(PATH);
 	    assertEquals(5, newFileWalker.getFiltredList().size());
 	}
@@ -68,6 +70,7 @@ public class FileWalkerTest {
 		when(mockFilter.accept(any(File.class))).thenReturn(true);
 		filterTestList.add(mockFilter);
 		newFileWalker.orderFileFilterBuild(filterTestList, AndOrEnum.AND);
+		newFileWalker.setReportHolder(new Report());
 		newFileWalker.walk(PATH);
 		assertEquals(4, newFileWalker.getFiltredList().size());
 	}
@@ -77,6 +80,7 @@ public class FileWalkerTest {
 		filterTestList.add(new RegexFileFilter(".*3.*"));
 		filterTestList.add(new SizeFileFilter(17));
 		newFileWalker.orderFileFilterBuild(filterTestList, AndOrEnum.AND);
+		newFileWalker.setReportHolder(new Report());
 		newFileWalker.walk(PATH);
 		assertEquals(3, newFileWalker.getFiltredList().size());
 	}

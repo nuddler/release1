@@ -1,7 +1,8 @@
 package amg.net.filewalker;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
-import java.io.StringReader;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -32,7 +33,9 @@ public class StudentTest {
 		mark.setMarkName("Polish");
 		mark.setMarkValue(5);
 		student.getMarks().add(mark);
-
+		
+		assertEquals(student.getLastName(), je.getValue().getLastName());
+		assertEquals(student.getName(), je.getValue().getName());
 	}
 
 }

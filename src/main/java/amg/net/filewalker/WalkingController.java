@@ -16,6 +16,7 @@ public class WalkingController {
 	public void run(String path) {
 		FileWalker newFileWalker = new FileWalker();
 		setup(newFileWalker);
+		newFileWalker.setReportHolder(new Report());
 		newFileWalker.walk(path);
 		System.out.println("File list in path "+path+":");
 		ShowMachine.showPath(newFileWalker.getFileList());

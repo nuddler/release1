@@ -20,7 +20,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="fileWalker" class="amg.net.filewalker.FileWalker" />
+	<bean id="fileWalker" class="amg.net.filewalker.FileWalker" destroy-method="destroy"/>
 
 	<bean id="filterList" class="java.util.ArrayList">
 		<constructor-arg>
@@ -30,8 +30,11 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	
 	<bean id="filterFlag" class="amg.net.filewalker.AndOrEnum"
 		factory-method="valueOf">
 		<constructor-arg value="AND" />
 	</bean>
+	
+	<bean id="reportValuesHolder" class="amg.net.filewalker.Report"/>
 </beans>

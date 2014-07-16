@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="report" type="report" />
+	<xs:complexType name="report">
+		<xs:sequence>
+			<xs:element name="walkingTime" type="xs:long" />
+			<xs:element name="wholeProccesingTime" type="xs:long" />
+			<xs:element name="singleProcessTimeList" type="xs:long" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
