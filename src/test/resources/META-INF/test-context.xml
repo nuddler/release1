@@ -11,9 +11,15 @@
        http://www.springframework.org/schema/aop 
        http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
        
-
 	<context:component-scan base-package="amg.net.filewalker" />
+	 
+	<!--
+	 <aop:aspectj-autoproxy/>
+	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
+	 -->
 
+	<bean id="fileWalkerAspect" class="amg.net.filewalker.FileWalkerAspect"/>
+	
 	<bean id="regexFilter" class="org.apache.commons.io.filefilter.RegexFileFilter">
 		<constructor-arg name="pattern" value=".*3.*">
 		</constructor-arg>

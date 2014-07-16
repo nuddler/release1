@@ -13,7 +13,7 @@ import org.aspectj.lang.annotation.Pointcut;
 public class FileWalkerAspect {
 	private static final Logger logger =  LogManager.getLogger(FileWalkerAspect.class);
 
-	  @Pointcut("call(* amg.net.filewalker..*.*(..))") //1
+	  @Pointcut("execution(* amg.net.filewalker..*.*(..))") //1
 	  public void handleDaoMethod() {}
 
 	  @Before("amg.net.filewalker.FileWalkerAspect.handleDaoMethod()") //2

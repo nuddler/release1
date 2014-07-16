@@ -12,12 +12,17 @@
 		<spring.version>4.0.6.RELEASE</spring.version>
 	</properties>
 	<repositories>
-        <repository>
-            <id>jcgay-releases</id>
-            <url>https://repository-jcgay.forge.cloudbees.com/release/</url>
-        </repository>
-    </repositories>
+		<repository>
+			<id>jcgay-releases</id>
+			<url>https://repository-jcgay.forge.cloudbees.com/release/</url>
+		</repository>
+	</repositories>
 	<dependencies>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.fusesource.jansi</groupId>
 			<artifactId>jansi</artifactId>
@@ -70,6 +75,11 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
