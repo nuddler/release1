@@ -27,8 +27,10 @@ public class SpringWalkerTest {
 	@Autowired
 	FileWalker fileWalker;
 	int MIN_FILE_NO = 1;
+	
 	@Autowired
-	AndOrEnum filterFlag;
+	AppConfiguration cfg;
+	
 	@Autowired
 	List<IOFileFilter> filterList;
 
@@ -36,7 +38,7 @@ public class SpringWalkerTest {
 	
 	@Test
 	public void positiveTest()  {
-		fileWalker.orderFileFilterBuild(filterList, filterFlag);
+		fileWalker.orderFileFilterBuild(filterList, cfg.getType());
 		
 		processorList.add(new LineCountProcessor());
 		processorList.add(new REGEXCountProcessor(".*1.*"));

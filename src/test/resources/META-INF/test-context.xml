@@ -13,8 +13,8 @@
        
 	<context:component-scan base-package="amg.net.filewalker" />
 	 
+	<aop:aspectj-autoproxy/>
 	<!--
-	 <aop:aspectj-autoproxy/>
 	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
 	 -->
 
@@ -41,10 +41,12 @@
 		</constructor-arg>
 	</bean>
 	
-	<bean id="filterFlag" class="amg.net.filewalker.AndOrEnum"
+	<!-- <bean id="filterFlag" class="amg.net.filewalker.AndOrEnum"
 		factory-method="valueOf">
 		<constructor-arg value="AND" />
-	</bean>
+	</bean> -->
+	
+	
 	
 	<bean id="reportValuesHolder" class="amg.net.filewalker.Report"/>
 </beans>

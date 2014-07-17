@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <report>
-    <walkingTime>263846814</walkingTime>
-    <wholeProccesingTime>262596750</wholeProccesingTime>
-    <singleProcessTimeList>199765998</singleProcessTimeList>
-    <singleProcessTimeList>62796150</singleProcessTimeList>
+    <walkingTime>0</walkingTime>
+    <wholeProccesingTime>0</wholeProccesingTime>
 </report>

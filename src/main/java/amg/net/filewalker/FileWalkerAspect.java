@@ -13,27 +13,26 @@ import org.aspectj.lang.annotation.Pointcut;
 public class FileWalkerAspect {
 	private static final Logger logger =  LogManager.getLogger(FileWalkerAspect.class);
 
-	  @Pointcut("execution(* amg.net.filewalker..*.*(..))") //1
-	  public void handleDaoMethod() {}
+	  @Pointcut("execution(* amg.net.filewalker.*.*(..))") //1
+	  public void handleMethod() {}
 
-	  @Before("amg.net.filewalker.FileWalkerAspect.handleDaoMethod()") //2
+	  @Before("handleMethod()") //2
 	  public void before(JoinPoint _jp) {
 		  logger.error("before");
 	  }
 
-	  @Around("amg.net.filewalker.FileWalkerAspect.handleDaoMethod()") //3
+	  @Around("handleMethod()") //3
 	  public Object logExecutionTime(ProceedingJoinPoint _pjp) throws Throwable {
-	    String className  = _pjp.getTarget().getClass().getSimpleName();
-	    String methodName = _pjp.getSignature().getName()+"()";
-	    logger.error("Method "+className+"."+methodName);
+	    logger.error("Around 1"+_pjp);
 
 	    long time = System.currentTimeMillis();
 
 	    try {
 	      return _pjp.proceed();
-	    } finally {
+	    } 
+	    finally {
 	      time = System.currentTimeMillis() - time;
-	      logger.error("Method "+className+"."+methodName+" successfully executed in "+time+" ms");
+	      logger.error("Around 2, Time:"+time);
 	    }
 	  }
 }
